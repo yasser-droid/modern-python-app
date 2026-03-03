@@ -16,14 +16,18 @@ stages:
   - job: BuildPython
     steps:
     # Installer Python
+      script: echo Hello, world!
+      displayName: 'Run a one-line script
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '3.9'
     # Installer dépendances
     - script: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-      displayName: "Install dependencies"
+        echo Add other tasks to build, test, and deploy your project.
+        echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
+      
     # Créer dossier artifact
     - script: |
         mkdir -p $(Build.ArtifactStagingDirectory)
@@ -34,11 +38,7 @@ stages:
       inputs:
         pathToPublish: '$(Build.ArtifactStagingDirectory)'
         artifactName: 'pythonapp'
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  
+
+
