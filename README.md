@@ -1,5 +1,5 @@
 # Modern Python App
-Created via PowerShell automation.
+
 
 ## Run
 1. python -m venv venv
