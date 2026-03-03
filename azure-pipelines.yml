@@ -7,7 +7,7 @@ trigger:
 - main
  
 pool:
-  name: Agent1   # Self-hosted agent pool
+  name: Agent1
  
 stages:
 - stage: Build
@@ -15,23 +15,19 @@ stages:
   - job: BuildPython
     steps:
  
-    - script: echo "Hello, world!"
-      displayName: 'Run a one-line script'
- 
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '3.9'
+    - script: |
+        echo "Python version:"
+        python3 --version
+      displayName: "Check Python"
  
     - script: |
-        echo "Installing dependencies..."
-        python -m pip install --upgrade pip
+        python3 -m pip install --upgrade pip
         if [ -f requirements.txt ]; then
-          pip install -r requirements.txt
+          python3 -m pip install -r requirements.txt
         fi
-      displayName: 'Install dependencies'
+      displayName: "Install dependencies"
  
     - script: |
-        echo "Preparing artifact..."
         mkdir -p $(Build.ArtifactStagingDirectory)
         cp -r * $(Build.ArtifactStagingDirectory)
       displayName: "Prepare artifact"
